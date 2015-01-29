@@ -10,11 +10,12 @@ namespace TestTool
     {
         static void Main(string[] args)
         {
-            using (var fs = File.OpenRead("d:\\test.msg"))
+            using (var fs = File.OpenRead("d:\\test.doc"))
             {
-                var data = new byte[2048];
-                fs.Read(data, 0, 2048);
+                var data = new byte[8092];
+                fs.Read(data, 0, 8092);
                 var c = new CompoundFileStorage.CompoundFile(new MemoryStream(data));
+                var r = c.RootStorage;
             }
         }
     }

@@ -28,19 +28,19 @@ namespace CompoundFileStorage.Exceptions
     [Serializable]
     public class CFItemNotFound : CFException
     {
-        protected CFItemNotFound(SerializationInfo info, StreamingContext context) : base(info, context)
+        internal CFItemNotFound(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
 
-        public CFItemNotFound() : base("Entry not found")
+        internal CFItemNotFound() : base("Entry not found")
         {
         }
 
-        public CFItemNotFound(string message) : base(message, null)
+        internal CFItemNotFound(string message) : base(message, null)
         {
         }
 
-        public CFItemNotFound(string message, Exception innerException) : base(message, innerException)
+        internal CFItemNotFound(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

@@ -29,19 +29,19 @@ namespace CompoundFileStorage.Exceptions
     [Serializable]
     public class CFDisposedException : CFException
     {
-        public CFDisposedException()
+        internal CFDisposedException()
         {
         }
 
-        protected CFDisposedException(SerializationInfo info, StreamingContext context) : base(info, context)
+        internal CFDisposedException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
 
-        public CFDisposedException(string message) : base(message, null)
+        internal CFDisposedException(string message) : base(message, null)
         {
         }
 
-        public CFDisposedException(string message, Exception innerException) : base(message, innerException)
+        internal CFDisposedException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

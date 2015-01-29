@@ -610,7 +610,8 @@ namespace CompoundFileStorage
 
                 LoadDirectories();
 
-                RootStorage = new CFStorage(this, _directoryEntries[0]);
+                if (_directoryEntries.Count == 1)
+                    RootStorage = new CFStorage(this, _directoryEntries[0]);
             }
             catch (Exception)
             {

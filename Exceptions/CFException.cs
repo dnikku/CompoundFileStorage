@@ -32,15 +32,15 @@ namespace CompoundFileStorage.Exceptions
         {
         }
 
-        protected CFException(SerializationInfo info, StreamingContext context) : base(info, context)
+        internal CFException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
 
-        public CFException(string message) : base(message, null)
+        internal CFException(string message) : base(message, null)
         {
         }
 
-        public CFException(string message, Exception innerException) : base(message, innerException)
+        internal CFException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }
