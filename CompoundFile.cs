@@ -163,6 +163,7 @@ namespace CompoundFileStorage
         ///     File sectors
         /// </summary>
         private SectorCollection _sectors = new SectorCollection();
+
         #endregion
 
         #region Properties
@@ -210,6 +211,12 @@ namespace CompoundFileStorage
         ///     The name of the compound file, null when the compound file is opened from a stream
         /// </summary>
         public string FileName { get; private set; }
+
+        /// <summary>
+        ///     When set to <c>true</c> the code tries to read the file even when it is corrupted,
+        ///     otherwhise a <see cref="CFCorruptedFileException"/> exception is thrown
+        /// </summary>
+        public bool ReadCorruptedFile { get; private set; }
         #endregion
 
         #region Constructors
@@ -284,8 +291,7 @@ namespace CompoundFileStorage
         {
             _header = new Header((ushort) cfsVersion);
             _sectorRecycle = sectorRecycle;
-
-
+            
             _difatSectorFATEntriesCount = (GetSectorSize()/4) - 1;
             _fatSectorEntriesCount = (GetSectorSize()/4);
 
@@ -294,45 +300,6 @@ namespace CompoundFileStorage
 
             RootStorage.DirEntry.SetEntryName("Root Entry");
             RootStorage.DirEntry.StgType = StgType.StgRoot;
-        }
-
-        /// <summary>
-        ///     Load an existing compound file.
-        /// </summary>
-        /// <param name="fileName">Compound file to read from</param>
-        /// <example>
-        ///     <code>
-        ///  //A xls file should have a Workbook stream
-        ///  string filename = "report.xls";
-        /// 
-        ///  CompoundFile cf = new CompoundFile(filename);
-        ///  CFStream foundStream = cf.RootStorage.GetStream("Workbook");
-        /// 
-        ///  byte[] temp = foundStream.GetData();
-        /// 
-        ///  Assert.IsNotNull(temp);
-        /// 
-        ///  cf.Close();
-        ///  </code>
-        /// </example>
-        /// <remarks>
-        ///     File will be open in read-only mode: it has to be saved
-        ///     with a different filename. A wrapping implementation has to be provided
-        ///     in order to remove/substitute an existing file. Version will be
-        ///     automatically recognized from the file. Sector recycle is turned off
-        ///     to achieve the best reading/writing performance in most common scenarios.
-        /// </remarks>
-        public CompoundFile(string fileName)
-        {
-            _sectorRecycle = false;
-            _updateMode = UpdateMode.ReadOnly;
-            _eraseFreeSectors = false;
-
-            LoadFile(fileName);
-            FileName = fileName;
-
-            _difatSectorFATEntriesCount = (GetSectorSize()/4) - 1;
-            _fatSectorEntriesCount = (GetSectorSize()/4);
         }
 
         /// <summary>
@@ -412,9 +379,59 @@ namespace CompoundFileStorage
         }
 
         /// <summary>
+        ///     Load an existing compound file.
+        /// </summary>
+        /// <param name="fileName">Compound file to read from</param>
+        /// <param name="readCorruptedFile">
+        ///     When set to <c>true</c> the code tries to read the file even when it is corrupted,
+        ///     otherwhise a <see cref="CFCorruptedFileException"/> exception is thrown
+        /// </param>
+        /// <example>
+        ///     <code>
+        ///  //A xls file should have a Workbook stream
+        ///  string filename = "report.xls";
+        /// 
+        ///  CompoundFile cf = new CompoundFile(filename);
+        ///  CFStream foundStream = cf.RootStorage.GetStream("Workbook");
+        /// 
+        ///  byte[] temp = foundStream.GetData();
+        /// 
+        ///  Assert.IsNotNull(temp);
+        /// 
+        ///  cf.Close();
+        ///  </code>
+        /// </example>
+        /// <remarks>
+        ///     File will be open in read-only mode: it has to be saved
+        ///     with a different filename. A wrapping implementation has to be provided
+        ///     in order to remove/substitute an existing file. Version will be
+        ///     automatically recognized from the file. Sector recycle is turned off
+        ///     to achieve the best reading/writing performance in most common scenarios.
+        /// </remarks>
+        /// <exception cref="CFCorruptedFileException">Raised when the file is corrupt and 
+        /// <permission cref="readCorruptedFile"></permission> is set to <c>true</c></exception>
+        public CompoundFile(string fileName, bool readCorruptedFile = false)
+        {
+            ReadCorruptedFile = readCorruptedFile;
+            _sectorRecycle = false;
+            _updateMode = UpdateMode.ReadOnly;
+            _eraseFreeSectors = false;
+
+            LoadFile(fileName);
+            FileName = fileName;
+
+            _difatSectorFATEntriesCount = (GetSectorSize() / 4) - 1;
+            _fatSectorEntriesCount = (GetSectorSize() / 4);
+        }
+
+        /// <summary>
         ///     Load an existing compound file from a stream.
         /// </summary>
         /// <param name="stream">Streamed compound file</param>
+        /// <param name="readCorruptedFile">
+        ///     When set to <c>true</c> the code tries to read the file even when it is corrupted,
+        ///     otherwhise a <see cref="CFCorruptedFileException"/> exception is thrown
+        /// </param>
         /// <example>
         ///     <code>
         ///  
@@ -434,8 +451,11 @@ namespace CompoundFileStorage
         /// </example>
         /// <exception cref="CFException">Raised when trying to open a non-seekable stream</exception>
         /// <exception cref="CFException">Raised stream is null</exception>
-        public CompoundFile(Stream stream)
+        /// <exception cref="CFCorruptedFileException">Raised when the file is corrupt and 
+        /// <permission cref="readCorruptedFile"></permission> is set to <c>true</c></exception>
+        public CompoundFile(Stream stream, bool readCorruptedFile = false)
         {
+            ReadCorruptedFile = true;
             LoadStream(stream);
 
             _difatSectorFATEntriesCount = (GetSectorSize()/4) - 1;
@@ -583,8 +603,7 @@ namespace CompoundFileStorage
 
                 if (stream.Length > 0x7FFFFF0)
                     TransactionLockAllocated = true;
-
-
+                
                 _sectors = new SectorCollection();
                 for (var i = 0; i < numberOfSectors; i++)
                     _sectors.Add(null);
@@ -1224,6 +1243,10 @@ namespace CompoundFileStorage
                 if (validationCount < 0)
                 {
                     Close();
+                    
+                    if (ReadCorruptedFile)
+                        break;
+                    
                     throw new CFCorruptedFileException("DIFAT sectors count mismatched. Corrupted compound file");
                 }
 
@@ -1264,12 +1287,24 @@ namespace CompoundFileStorage
             while (idx < _header.FATSectorsNumber && idx < numberOfHeaderFATEntry)
             {
                 nextSecId = _header.DIFAT[idx];
-                var sector = _sectors[nextSecId];
+                Sector sector = null;
+
+                try
+                {
+                    sector = _sectors[nextSecId];
+                }
+                catch (Exception)
+                {
+                    sector = null;
+                }
 
                 if (sector == null)
                 {
                     sector = new Sector(GetSectorSize(), SourceStream) {Id = nextSecId, Type = SectorType.FAT};
-                    _sectors[nextSecId] = sector;
+                    if (nextSecId > _sectors.Count - 1)
+                        _sectors.Add(sector);
+                    else
+                        _sectors[nextSecId] = sector;
                 }
 
                 result.Add(sector);
@@ -1349,10 +1384,15 @@ namespace CompoundFileStorage
                 if (nextSecId == Sector.Endofchain) break;
 
                 if (nextSecId >= _sectors.Count)
+                {
+                    if (ReadCorruptedFile)
+                        break;
+
                     throw new CFCorruptedFileException(
                         string.Format(
                             "Next Sector ID reference an out of range sector. NextID : {0} while sector count {1}",
                             nextSecId, _sectors.Count));
+                }
 
                 var sector = _sectors[nextSecId];
                 if (sector == null)
@@ -1369,7 +1409,8 @@ namespace CompoundFileStorage
                 if (next != nextSecId)
                     nextSecId = next;
                 else
-                    throw new CFCorruptedFileException("Cyclic sector chain found. File is corrupted");
+                    break;
+                //    throw new CFCorruptedFileException("Cyclic sector chain found. File is corrupted");
             }
 
             return result;
@@ -1608,6 +1649,10 @@ namespace CompoundFileStorage
             if (_directoryEntries[sid].StgType == StgType.StgInvalid)
             {
                 Close();
+
+                if (ReadCorruptedFile)
+                    return false;
+
                 throw new CFCorruptedFileException(
                     "A directory entry has a valid reference to an invalid storage type directory");
             }
@@ -1615,6 +1660,10 @@ namespace CompoundFileStorage
             if (Enum.IsDefined(typeof (StgType), _directoryEntries[sid].StgType))
                 return true; //No fault condition encountered for sid being validated
             Close();
+
+            if (ReadCorruptedFile)
+                return false;
+
             throw new CFCorruptedFileException("A directory entry has an invalid storage type");
         }
         #endregion
@@ -1634,11 +1683,9 @@ namespace CompoundFileStorage
             var dirReader
                 = new StreamView(directoryChain, GetSectorSize(), directoryChain.Count*GetSectorSize(), SourceStream);
 
-
             while (dirReader.Position < directoryChain.Count*GetSectorSize())
             {
-                var de
-                    = new DirectoryEntry(StgType.StgInvalid);
+                var de = new DirectoryEntry(StgType.StgInvalid);
 
                 //We are not inserting dirs. Do not use 'InsertNewDirectoryEntry'
                 de.Read(dirReader);
