@@ -109,7 +109,7 @@ namespace CompoundFileStorage
         /// <param name="sectorSize"></param>
         /// <param name="stream"></param>
         /// <exception cref="CFException">
-        ///     Raised when <see cref="sectorChain" /> is null or <see cref="sectorSize" /> is zero or
+        ///     Raised when <paramref name="sectorChain" /> is null or <see cref="sectorSize" /> is zero or
         ///     smaller
         /// </exception>
         public StreamView(List<Sector> sectorChain, int sectorSize, Stream stream)
@@ -238,7 +238,7 @@ namespace CompoundFileStorage
 
         #region Seek
         /// <summary>
-        ///     Seeks a new position in the <see cref="_stream" /> from the <see cref="origin" />
+        ///     Seeks a new position in the <see cref="_stream" /> from the <paramref name="origin" />
         /// </summary>
         /// <param name="offset"></param>
         /// <param name="origin"></param>
@@ -317,7 +317,7 @@ namespace CompoundFileStorage
 
         #region Write
         /// <summary>
-        ///     Writes the <see cref="buffer" /> to the <see cref="_stream" /> on the <see cref="offset" />
+        ///     Writes the <paramref name="buffer" /> to the <see cref="_stream" /> on the <paramref name="offset" />
         /// </summary>
         /// <param name="buffer"></param>
         /// <param name="offset"></param>

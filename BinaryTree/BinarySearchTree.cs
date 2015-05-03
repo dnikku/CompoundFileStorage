@@ -24,6 +24,11 @@ using CompoundFileStorage.BinaryTree.Exceptions;
 
 namespace CompoundFileStorage.BinaryTree
 {
+    /// <summary>
+    /// Raised when a node is opened
+    /// </summary>
+    /// <param name="node"></param>
+    /// <typeparam name="T"></typeparam>
     public delegate void NodeAction<T>(BinaryTreeNode<T> node);
 
     /// <summary>
@@ -42,6 +47,9 @@ namespace CompoundFileStorage.BinaryTree
         #endregion
 
         #region Properties
+        /// <summary>
+        /// The root of the binary tree
+        /// </summary>
         public BinaryTreeNode<T> Root { get; private set; }
 
         /// <summary>
@@ -158,11 +166,11 @@ namespace CompoundFileStorage.BinaryTree
         #endregion
 
         #region Constructors
-        public BinarySearchTree()
+        internal BinarySearchTree()
         {
         }
 
-        public BinarySearchTree(IComparer<T> comparer)
+        internal BinarySearchTree(IComparer<T> comparer)
         {
             _comparer = comparer;
         }
@@ -500,13 +508,13 @@ namespace CompoundFileStorage.BinaryTree
         #endregion
 
         #region VisitTreeInOrder
-        public void VisitTreeInOrder(NodeAction<T> nodeCallback)
+        internal void VisitTreeInOrder(NodeAction<T> nodeCallback)
         {
             if (Root != null)
                 DoVisitInOrder(Root, nodeCallback);
         }
 
-        public void VisitTreeInOrder(NodeAction<T> nodeCallback, bool recursive)
+        internal void VisitTreeInOrder(NodeAction<T> nodeCallback, bool recursive)
         {
             if (Root != null)
                 DoVisitInOrder(Root, nodeCallback);

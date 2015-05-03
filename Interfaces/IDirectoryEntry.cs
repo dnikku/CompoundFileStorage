@@ -27,6 +27,7 @@ namespace CompoundFileStorage.Interfaces
     /// </summary>
     public interface IDirectoryEntry : IComparable
     {
+        #pragma warning disable 1591
         int Child { get; set; }
 
         byte[] CreationDate { get; set; }
@@ -61,5 +62,6 @@ namespace CompoundFileStorage.Interfaces
         void SetEntryName(string entryName);
 
         void Write(Stream stream);
+        #pragma warning restore 1591
     }
 }

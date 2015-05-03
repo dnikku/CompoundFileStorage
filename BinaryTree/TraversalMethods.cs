@@ -24,8 +24,19 @@ namespace CompoundFileStorage.BinaryTree
     /// </summary>
     public enum TraversalMethod
     {
+        /// <summary>
+        /// Preorder
+        /// </summary>
         Preorder,
+
+        /// <summary>
+        /// Inorder
+        /// </summary>
         Inorder,
+
+        /// <summary>
+        /// Postorder
+        /// </summary>
         Postorder
     }
 }

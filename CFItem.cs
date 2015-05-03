@@ -33,6 +33,9 @@ namespace CompoundFileStorage
         #endregion
 
         #region Properties
+        /// <summary>
+        /// The <see cref="CompoundFile"/>
+        /// </summary>
         protected CompoundFile CompoundFile
         {
             get { return _compoundFile; }
@@ -145,7 +148,7 @@ namespace CompoundFileStorage
         #endregion
 
         #region CheckDisposed
-        protected void CheckDisposed()
+        internal void CheckDisposed()
         {
             if (_compoundFile.IsClosed)
                 throw new CFDisposedException(
@@ -154,10 +157,17 @@ namespace CompoundFileStorage
         #endregion
 
         #region CFItem
+        /// <summary>
+        /// Creates a new CFItem object
+        /// </summary>
         protected CFItem()
         {
         }
 
+        /// <summary>
+        /// Creates a new CFItem object and sets the <paramref name="compoundFile"/>
+        /// </summary>
+        /// <param name="compoundFile"></param>
         protected CFItem(CompoundFile compoundFile)
         {
             _compoundFile = compoundFile;
@@ -181,6 +191,12 @@ namespace CompoundFileStorage
         #endregion
 
         #region Operators
+        /// <summary>
+        /// Returns true when the <paramref name="leftItem"/> is the same as the <paramref name="rightItem"/>
+        /// </summary>
+        /// <param name="leftItem"></param>
+        /// <param name="rightItem"></param>
+        /// <returns></returns>
         public static bool operator ==(CFItem leftItem, CFItem rightItem)
         {
             // If both are null, or both are same instance, return true.
@@ -195,6 +211,12 @@ namespace CompoundFileStorage
             return leftItem.CompareTo(rightItem) == 0;
         }
 
+        /// <summary>
+        /// Returns true when the <paramref name="leftItem"/> is not the same as the <paramref name="rightItem"/>
+        /// </summary>
+        /// <param name="leftItem"></param>
+        /// <param name="rightItem"></param>
+        /// <returns></returns>
         public static bool operator !=(CFItem leftItem, CFItem rightItem)
         {
             return !(leftItem == rightItem);
@@ -209,6 +231,10 @@ namespace CompoundFileStorage
         #endregion
 
         #region GetHashCode
+        /// <summary>
+        /// Returns the hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return DirEntry.GetEntryName().GetHashCode();

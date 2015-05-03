@@ -28,19 +28,22 @@ namespace CompoundFileStorage.Exceptions
     [Serializable]
     public class CFFormatException : CFException
     {
-        public CFFormatException()
+        internal CFFormatException()
         {
         }
 
-        protected CFFormatException(SerializationInfo info, StreamingContext context) : base(info, context)
+        internal CFFormatException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
 
-        public CFFormatException(string message) : base(message, null)
+        internal CFFormatException(string message)
+            : base(message, null)
         {
         }
 
-        public CFFormatException(string message, Exception innerException) : base(message, innerException)
+        internal CFFormatException(string message, Exception innerException)
+            : base(message, innerException)
         {
         }
     }

@@ -1854,7 +1854,7 @@ namespace CompoundFileStorage
         /// </summary>
         /// <param name="cfItem"></param>
         /// <param name="buffer"></param>
-        /// <exception cref="CFException">Raised when <see cref="buffer" /> is null</exception>
+        /// <exception cref="CFException">Raised when <paramref name="buffer" /> is null</exception>
         private void SetStreamData(CFItem cfItem, Byte[] buffer)
         {
             if (buffer == null)

@@ -28,10 +28,17 @@ namespace CompoundFileStorage.BinaryTree
     public class NodeList<T> : Collection<Node<T>>
     {
         #region Constructors
+        /// <summary>
+        /// Creates this object and sets all its properties
+        /// </summary>
         public NodeList()
         {
         }
 
+        /// <summary>
+        /// Creates this object and sets all its properties
+        /// </summary>
+        /// <param name="initialSize"></param>
         public NodeList(int initialSize)
         {
             // Add the specified number of items

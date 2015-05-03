@@ -31,19 +31,22 @@ namespace CompoundFileStorage.Exceptions
     [Serializable]
     public class CFCorruptedFileException : CFException
     {
-        public CFCorruptedFileException()
+        internal CFCorruptedFileException()
         {
         }
 
-        protected CFCorruptedFileException(SerializationInfo info, StreamingContext context) : base(info, context)
+        internal CFCorruptedFileException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
 
-        public CFCorruptedFileException(string message) : base(message, null)
+        internal CFCorruptedFileException(string message)
+            : base(message, null)
         {
         }
 
-        public CFCorruptedFileException(string message, Exception innerException) : base(message, innerException)
+        internal CFCorruptedFileException(string message, Exception innerException)
+            : base(message, innerException)
         {
         }
     }

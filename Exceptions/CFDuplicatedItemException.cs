@@ -32,19 +32,22 @@ namespace CompoundFileStorage.Exceptions
     [Serializable]
     public class CFDuplicatedItemException : CFException
     {
-        public CFDuplicatedItemException()
+        internal CFDuplicatedItemException()
         {
         }
 
-        protected CFDuplicatedItemException(SerializationInfo info, StreamingContext context) : base(info, context)
+        internal CFDuplicatedItemException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
 
-        public CFDuplicatedItemException(string message) : base(message, null)
+        internal CFDuplicatedItemException(string message)
+            : base(message, null)
         {
         }
 
-        public CFDuplicatedItemException(string message, Exception innerException) : base(message, innerException)
+        internal CFDuplicatedItemException(string message, Exception innerException)
+            : base(message, innerException)
         {
         }
     }

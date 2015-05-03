@@ -60,6 +60,9 @@ namespace CompoundFileStorage
         #endregion
 
         #region Children
+        /// <summary>
+        /// The CFItem children
+        /// </summary>
         public BinarySearchTree<CFItem> Children
         {
             get

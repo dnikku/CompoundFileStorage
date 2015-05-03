@@ -28,19 +28,22 @@ namespace CompoundFileStorage.Exceptions
     [Serializable]
     public class CFInvalidOperation : CFException
     {
-        public CFInvalidOperation()
+        internal CFInvalidOperation()
         {
         }
 
-        protected CFInvalidOperation(SerializationInfo info, StreamingContext context) : base(info, context)
+        internal CFInvalidOperation(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
 
-        public CFInvalidOperation(string message) : base(message, null)
+        internal CFInvalidOperation(string message)
+            : base(message, null)
         {
         }
 
-        public CFInvalidOperation(string message, Exception innerException) : base(message, innerException)
+        internal CFInvalidOperation(string message, Exception innerException)
+            : base(message, innerException)
         {
         }
     }

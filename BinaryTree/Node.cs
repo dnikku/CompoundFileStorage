@@ -32,21 +32,39 @@ namespace CompoundFileStorage.BinaryTree
     public class Node<T>
     {
         #region Properties
+        /// <summary>
+        /// Returns <see cref="T"/>
+        /// </summary>
         public T Value { get; set; }
 
+        /// <summary>
+        /// Returns or sets its neighbours
+        /// </summary>
         protected NodeList<T> Neighbors { get; set; }
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Creates this object and sets all its properties
+        /// </summary>
         public Node()
         {
             Neighbors = null;
         }
 
+        /// <summary>
+        /// Creates this object and sets all its properties
+        /// </summary>
+        /// <param name="data"></param>
         public Node(T data) : this(data, null)
         {
         }
 
+        /// <summary>
+        /// Creates this object and sets all its properties
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="neighbors"></param>
         public Node(T data, NodeList<T> neighbors)
         {
             Value = data;

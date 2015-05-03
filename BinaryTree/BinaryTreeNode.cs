@@ -28,6 +28,9 @@ namespace CompoundFileStorage.BinaryTree
     public class BinaryTreeNode<T> : Node<T>
     {
         #region Properties
+        /// <summary>
+        /// The left node
+        /// </summary>
         public BinaryTreeNode<T> Left
         {
             get
@@ -45,6 +48,9 @@ namespace CompoundFileStorage.BinaryTree
             }
         }
 
+        /// <summary>
+        /// The right node
+        /// </summary>
         public BinaryTreeNode<T> Right
         {
             get
@@ -64,15 +70,28 @@ namespace CompoundFileStorage.BinaryTree
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Creates this object
+        /// </summary>
         public BinaryTreeNode()
         {
         }
 
+        /// <summary>
+        /// Creates this object
+        /// </summary>
+        /// <param name="data"></param>
         public BinaryTreeNode(T data)
             : base(data, null)
         {
         }
 
+        /// <summary>
+        /// Creates this object
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         public BinaryTreeNode(T data, BinaryTreeNode<T> left, BinaryTreeNode<T> right)
         {
             Value = data;

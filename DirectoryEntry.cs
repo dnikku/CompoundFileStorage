@@ -242,7 +242,7 @@ namespace CompoundFileStorage
 
         #region Write
         /// <summary>
-        ///     Writes to the <see cref="stream" />
+        ///     Writes to the <paramref name="stream" />
         /// </summary>
         /// <param name="stream"></param>
         public void Write(Stream stream)
@@ -269,7 +269,7 @@ namespace CompoundFileStorage
 
         #region Read
         /// <summary>
-        ///     Reads from the <see cref="stream" />
+        ///     Reads from the <paramref name="stream" />
         /// </summary>
         /// <param name="stream"></param>
         public void Read(Stream stream)

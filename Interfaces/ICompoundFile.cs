@@ -40,13 +40,13 @@ namespace CompoundFileStorage.Interfaces
         CFSVersion Version { get; }
 
         /// <summary>
-        ///     Close the Compound File object <see cref="T:OpenMcdf.CompoundFile">CompoundFile</see> and
+        ///     Close the Compound File object <paramref name="T:OpenMcdf.CompoundFile" /> and
         ///     free all associated resources (e.g. open file handle and allocated memory).
         ///     <remarks>
-        ///         When the <see cref="T:OpenMcdf.CompoundFile.Close()">Close</see> method is called,
+        ///         When the <paramref name="T:OpenMcdf.CompoundFile.Close()" /> method is called,
         ///         all the associated stream and storage objects are invalidated:
         ///         any operation invoked on them will produce a
-        ///         <see cref="T:OpenMcdf.CFDisposedException">CFDisposedException</see>.
+        ///         <paramref name="T:OpenMcdf.CFDisposedException" />.
         ///     </remarks>
         /// </summary>
         void Close();

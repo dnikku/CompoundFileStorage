@@ -216,7 +216,7 @@ namespace CompoundFileStorage
 
         #region Write
         /// <summary>
-        ///     Writes to the <see cref="stream" />
+        ///     Writes to the <paramref name="stream" />
         /// </summary>
         /// <param name="stream"></param>
         public void Write(Stream stream)

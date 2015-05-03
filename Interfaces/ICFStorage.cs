@@ -26,7 +26,7 @@ namespace CompoundFileStorage.Interfaces
     {
         /// <summary>
         ///     Gets a named
-        ///     <see cref="T:DocumentServices.Modules.Extractors.OfficeExtractor.OLECompoundFileStorage.CFStream">stream</see>
+        ///     <paramref name="T:DocumentServices.Modules.Extractors.OfficeExtractor.OLECompoundFileStorage.CFStream">stream</see>
         ///     contained in the current storage if existing.
         /// </summary>
         /// <param name="streamName">Name of the stream to look for</param>
