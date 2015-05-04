@@ -38,8 +38,7 @@ namespace CompoundFileStorage
         ///     Create a new CFStorage
         /// </summary>
         /// <param name="compFile">The Storage Owner - CompoundFile</param>
-        internal CFStorage(CompoundFile compFile)
-            : base(compFile)
+        internal CFStorage(CompoundFile compFile) : base(compFile)
         {
             DirEntry = new DirectoryEntry(StgType.StgStorage);
             compFile.InsertNewDirectoryEntry(DirEntry);
