@@ -33,7 +33,7 @@ namespace CompoundFileStorage.BinaryTree
     {
         #region Properties
         /// <summary>
-        /// Returns <see cref="T"/>
+        /// Returns T
         /// </summary>
         public T Value { get; set; }
 

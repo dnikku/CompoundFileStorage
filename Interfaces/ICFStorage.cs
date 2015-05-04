@@ -25,9 +25,7 @@ namespace CompoundFileStorage.Interfaces
     public interface ICFStorage : ICFItem
     {
         /// <summary>
-        ///     Gets a named
-        ///     <paramref name="T:DocumentServices.Modules.Extractors.OfficeExtractor.OLECompoundFileStorage.CFStream">stream</see>
-        ///     contained in the current storage if existing.
+        ///     Gets a named <see cref="ICFStream"/> contained in the current storage if existing.
         /// </summary>
         /// <param name="streamName">Name of the stream to look for</param>
         /// <returns>A stream reference if existing</returns>

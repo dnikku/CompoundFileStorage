@@ -37,16 +37,19 @@ namespace CompoundFileStorage.Interfaces
         /// </summary>
         ICFStorage RootStorage { get; }
 
+        /// <summary>
+        /// Returns the version of the compound file
+        /// </summary>
         CFSVersion Version { get; }
 
         /// <summary>
-        ///     Close the Compound File object <paramref name="T:OpenMcdf.CompoundFile" /> and
+        ///     Close the Compound File object <see cref="T:OpenMcdf.CompoundFile" /> and
         ///     free all associated resources (e.g. open file handle and allocated memory).
         ///     <remarks>
-        ///         When the <paramref name="T:OpenMcdf.CompoundFile.Close()" /> method is called,
+        ///         When the <see cref="T:OpenMcdf.CompoundFile.Close()" /> method is called,
         ///         all the associated stream and storage objects are invalidated:
         ///         any operation invoked on them will produce a
-        ///         <paramref name="T:OpenMcdf.CFDisposedException" />.
+        ///         <see cref="T:OpenMcdf.CFDisposedException" />.
         ///     </remarks>
         /// </summary>
         void Close();

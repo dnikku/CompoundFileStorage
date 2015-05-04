@@ -27,23 +27,58 @@ using CompoundFileStorage.Interfaces;
 
 namespace CompoundFileStorage
 {
-
     #region Enum StgType
+    /// <summary>
+    /// The storage type
+    /// </summary>
     public enum StgType
     {
+        /// <summary>
+        /// The type is invalid
+        /// </summary>
         StgInvalid = 0,
+
+        /// <summary>
+        /// The type is a storage
+        /// </summary>
         StgStorage = 1,
+
+        /// <summary>
+        /// The type is a stream
+        /// </summary>
         StgStream = 2,
+
+        /// <summary>
+        /// The type contains lock bytes
+        /// </summary>
         StgLockbytes = 3,
+
+        /// <summary>
+        /// The type is a property
+        /// </summary>
         StgProperty = 4,
+
+        /// <summary>
+        /// The type is the root storage
+        /// </summary>
         StgRoot = 5
     }
     #endregion
 
     #region Enum StgColor
+    /// <summary>
+    /// Storage color
+    /// </summary>
     public enum StgColor
     {
+        /// <summary>
+        /// Red
+        /// </summary>
         Red = 0,
+
+        /// <summary>
+        /// Black
+        /// </summary>
         Black = 1
     }
     #endregion

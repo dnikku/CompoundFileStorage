@@ -415,7 +415,7 @@ namespace CompoundFileStorage
         ///     to achieve the best reading/writing performance in most common scenarios.
         /// </remarks>
         /// <exception cref="CFCorruptedFileException">Raised when the file is corrupt and 
-        /// <permission cref="readCorruptedFile"></permission> is set to <c>true</c></exception>
+        /// <paramref name="readCorruptedFile" /> is set to <c>true</c></exception>
         public CompoundFile(string fileName, bool readCorruptedFile = false)
         {
             ReadCorruptedFile = readCorruptedFile;
@@ -458,7 +458,8 @@ namespace CompoundFileStorage
         /// <exception cref="CFException">Raised when trying to open a non-seekable stream</exception>
         /// <exception cref="CFException">Raised stream is null</exception>
         /// <exception cref="CFCorruptedFileException">Raised when the file is corrupt and 
-        /// <permission cref="readCorruptedFile"></permission> is set to <c>true</c></exception>
+        /// <paramref name="readCorruptedFile" /> is set to <c>true</c></exception>
+        // ReSharper disable once UnusedParameter.Local
         public CompoundFile(Stream stream, bool readCorruptedFile = false)
         {
             ReadCorruptedFile = true;
@@ -670,7 +671,7 @@ namespace CompoundFileStorage
 
         #region LoadStream
         /// <summary>
-        ///     Loads a compound file from a <see cref="stream" />
+        ///     Loads a compound file from a <see cref="Stream"/>
         /// </summary>
         /// <param name="stream"></param>
         /// <exception cref="CFException">Raised when the stream is null or non-seekable</exception>
@@ -1294,7 +1295,7 @@ namespace CompoundFileStorage
             while (idx < _header.FATSectorsNumber && idx < numberOfHeaderFATEntry)
             {
                 nextSecId = _header.DIFAT[idx];
-                Sector sector = null;
+                Sector sector;
 
                 try
                 {
@@ -1514,7 +1515,7 @@ namespace CompoundFileStorage
 
         #region InsertNewDirectoryEntry
         /// <summary>
-        ///     Inserts a new <see cref="directoryEntry" />
+        ///     Inserts a new <see cref="IDirectoryEntry" />
         /// </summary>
         /// <param name="directoryEntry"></param>
         internal void InsertNewDirectoryEntry(IDirectoryEntry directoryEntry)
@@ -1554,7 +1555,7 @@ namespace CompoundFileStorage
 
         #region GetChildrenTree
         /// <summary>
-        ///     Returns the children tree for the given <see cref="sid" />
+        ///     Returns the children tree for the given <paramref name="sid" />
         /// </summary>
         /// <param name="sid"></param>
         /// <returns></returns>
@@ -1707,7 +1708,7 @@ namespace CompoundFileStorage
         ///     Removes an directory entry
         /// </summary>
         /// <param name="sid"></param>
-        /// <exception cref="CFException">Raised when the <see cref="sid" /> is invalid</exception>
+        /// <exception cref="CFException">Raised when the <paramref name="sid" /> is invalid</exception>
         internal void RemoveDirectoryEntry(int sid)
         {
             if (sid >= _directoryEntries.Count)
@@ -1994,7 +1995,7 @@ namespace CompoundFileStorage
 
         #region GetData
         /// <summary>
-        ///     Gets data from the <see cref="cFStream" />
+        ///     Gets data from the <see cref="CFStream" />
         /// </summary>
         /// <param name="cFStream"></param>
         /// <param name="offset"></param>
@@ -2030,7 +2031,7 @@ namespace CompoundFileStorage
         }
 
         /// <summary>
-        ///     Gets data from the <see cref="cFStream" />
+        ///     Gets data from the <see cref="CFStream" />
         /// </summary>
         /// <param name="cFStream"></param>
         /// <returns></returns>
@@ -2138,7 +2139,7 @@ namespace CompoundFileStorage
 
         #region GetAllNamedEntries
         /// <summary>
-        ///     Get a list of all entries which start with the given <see cref="entryName" />
+        ///     Get a list of all entries which start with the given <paramref name="entryName" />
         /// </summary>
         /// <param name="entryName">Name of entries to retrive</param>
         /// <param name="parentSibling">

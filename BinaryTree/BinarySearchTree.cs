@@ -159,6 +159,9 @@ namespace CompoundFileStorage.BinaryTree
         /// </summary>
         public int Count { get; private set; }
 
+        /// <summary>
+        ///     Returns true when readonly
+        /// </summary>
         public bool IsReadOnly
         {
             get { return false; }

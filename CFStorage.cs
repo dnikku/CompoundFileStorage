@@ -85,7 +85,7 @@ namespace CompoundFileStorage
         /// </summary>
         /// <param name="streamName">Name of the stream to look for</param>
         /// <returns>A stream reference if existing</returns>
-        /// <exception cref="CFItemNotFound">Raised if <see cref="streamName" /> is not found</exception>
+        /// <exception cref="CFItemNotFound">Raised if <paramref name="streamName"/> is not found</exception>
         public ICFStream GetStream(string streamName)
         {
             CheckDisposed();
@@ -103,10 +103,10 @@ namespace CompoundFileStorage
 
         #region AddStream
         /// <summary>
-        ///     Create a new child stream inside the current <see cref="T:OpenMcdf.CFStorage">storage</see>
+        ///     Create a new child stream inside the current <see cref="CFStorage">storage</see>
         /// </summary>
         /// <param name="streamName">The new stream name</param>
-        /// <returns>The new <see cref="T:OpenMcdf.CFStream">stream</see> reference</returns>
+        /// <returns>The new <see cref="CFStream">stream</see> reference</returns>
         /// <exception cref="CFDuplicatedItemException">Raised when adding an item with the same name of an existing one</exception>
         /// <exception cref="CFDisposedException">Raised when adding a stream to a closed compound file</exception>
         /// <exception cref="CFException">Raised when adding a stream with null or empty name</exception>
@@ -177,7 +177,6 @@ namespace CompoundFileStorage
         ///  if exists
         ///  {
         ///      CFStream foundStream = cf.RootStorage.GetStream("Workbook");
-        ///  
         ///      byte[] temp = foundStream.GetData();
         ///  }
         /// 
@@ -203,7 +202,7 @@ namespace CompoundFileStorage
         /// </summary>
         /// <param name="storageName">Name of the storage to look for</param>
         /// <returns>A storage reference if existing.</returns>
-        /// <exception cref="CFItemNotFound">Raised if <see cref="storageName" /> is not found</exception>
+        /// <exception cref="CFItemNotFound">Raised if <paramref name="storageName"/> is not found</exception>
         public ICFStorage GetStorage(string storageName)
         {
             CheckDisposed();
@@ -223,10 +222,10 @@ namespace CompoundFileStorage
         ///     Create new child storage directory inside the current storage.
         /// </summary>
         /// <param name="storageName">The new storage name</param>
-        /// <returns>Reference to the new <see cref="T:OpenMcdf.CFStorage">storage</see></returns>
-        /// <exception cref="T:OpenMcdf.CFDuplicatedItemException">Raised when adding an item with the same name of an existing one</exception>
-        /// <exception cref="T:OpenMcdf.CFDisposedException">Raised when adding a storage to a closed compound file</exception>
-        /// <exception cref="T:OpenMcdf.CFException">Raised when adding a storage with null or empty name</exception>
+        /// <returns>Reference to the new <see cref="CFStorage">storage</see></returns>
+        /// <exception cref="CFDuplicatedItemException">Raised when adding an item with the same name of an existing one</exception>
+        /// <exception cref="CFDisposedException">Raised when adding a storage to a closed compound file</exception>
+        /// <exception cref="CFException">Raised when adding a storage with null or empty name</exception>
         /// <example>
         ///     <code>
         ///  
@@ -248,7 +247,7 @@ namespace CompoundFileStorage
             CheckDisposed();
 
             if (string.IsNullOrEmpty(storageName))
-                throw new CFException("Stream name cannot be null or empty");
+                throw new CFException("Storage name cannot be null or empty");
 
             // Add new Storage directory entry
             var storage = new CFStorage(CompoundFile);
@@ -265,7 +264,6 @@ namespace CompoundFileStorage
                 throw new CFDuplicatedItemException("An entry with name '" + storageName +
                                                     "' is already present in storage '" + Name + "' ");
             }
-
 
             CompoundFile.RefreshIterative(Children.Root);
             DirEntry.Child = Children.Root.Value.DirEntry.SID;

@@ -184,6 +184,11 @@ namespace CompoundFileStorage
         #endregion
 
         #region IComparable Members
+        /// <summary>
+        /// Compares the <paramref name="obj"/> to this object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public int CompareTo(object obj)
         {
             return DirEntry.CompareTo(((CFItem) obj).DirEntry);
@@ -224,6 +229,11 @@ namespace CompoundFileStorage
         #endregion
 
         #region Equals
+        /// <summary>
+        /// Returns true when the <paramref name="obj"/> is equal to this object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             return CompareTo(obj) == 0;

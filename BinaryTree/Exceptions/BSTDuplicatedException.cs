@@ -21,8 +21,11 @@
 
 namespace CompoundFileStorage.BinaryTree.Exceptions
 {
+    /// <summary>
+    /// Raised when an item is already present in the BSTree
+    /// </summary>
     public class BSTDuplicatedException : ApplicationException
     {
-        public BSTDuplicatedException() : base("Duplicated item already present in BSTree") { }
+        internal BSTDuplicatedException() : base("Duplicated item already present in BSTree") { }
     }
 }

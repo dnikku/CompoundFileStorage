@@ -109,7 +109,7 @@ namespace CompoundFileStorage
         /// <param name="sectorSize"></param>
         /// <param name="stream"></param>
         /// <exception cref="CFException">
-        ///     Raised when <paramref name="sectorChain" /> is null or <see cref="sectorSize" /> is zero or
+        ///     Raised when <paramref name="sectorChain" /> is null or <paramref name="sectorSize" /> is zero or
         ///     smaller
         /// </exception>
         public StreamView(List<Sector> sectorChain, int sectorSize, Stream stream)

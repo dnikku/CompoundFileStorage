@@ -35,18 +35,15 @@ namespace CompoundFileStorage.Exceptions
         {
         }
 
-        internal CFCorruptedFileException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
+        internal CFCorruptedFileException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
 
-        internal CFCorruptedFileException(string message)
-            : base(message, null)
+        internal CFCorruptedFileException(string message) : base(message, null)
         {
         }
 
-        internal CFCorruptedFileException(string message, Exception innerException)
-            : base(message, innerException)
+        internal CFCorruptedFileException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }
