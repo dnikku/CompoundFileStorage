@@ -57,8 +57,11 @@ namespace CompoundFileStorage.Interfaces
         StgType StgType { get; set; }
 
         Guid StorageCLSID { get; set; }
+
         string GetEntryName();
+
         void Read(Stream stream);
+
         void SetEntryName(string entryName);
 
         void Write(Stream stream);

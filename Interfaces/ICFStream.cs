@@ -1,6 +1,4 @@
-﻿using System;
-
-/*
+﻿ /*
      The contents of this file are subject to the Mozilla Public License
      Version 1.1 (the "License"); you may not use this file except in
      compliance with the License. You may obtain a copy of the License at
@@ -40,7 +38,7 @@ namespace CompoundFileStorage.Interfaces
         /// <exception cref="T:DocumentServices.Modules.Extractors.OfficeExtractor.OLECompoundFileStorage.CFDisposedException">
         ///     Raised when the owner compound file has been closed.
         /// </exception>
-        Byte[] GetData();
+        byte[] GetData();
 
         /// <summary>
         ///     Get <paramref name="count" /> bytes associated with the stream object, starting from
@@ -48,19 +46,19 @@ namespace CompoundFileStorage.Interfaces
         ///     effective count of bytes read.
         /// </summary>
         /// <example>
-        ///     <code>
-        /// CompoundFile cf = new CompoundFile("AFileName.cfs");
-        /// CFStream st = cf.RootStorage.GetStream("MyStream");
-        /// int count = 8;
-        /// // The stream is supposed to have a length greater than offset + count
-        /// byte[] data = st.GetData(20, ref count);  
-        /// cf.Close();
+        /// <code>
+        ///     CompoundFile cf = new CompoundFile("AFileName.cfs");
+        ///     CFStream st = cf.RootStorage.GetStream("MyStream");
+        ///     int count = 8;
+        ///     // The stream is supposed to have a length greater than offset + count
+        ///     byte[] data = st.GetData(20, ref count);  
+        ///     cf.Close();
         /// </code>
         /// </example>
         /// <returns>Array of byte containing stream data</returns>
         /// <exception cref="T:DocumentServices.Modules.Extractors.OfficeExtractor.OLECompoundFileStorage.CFDisposedException">
         ///     Raised when the owner compound file has been closed.
         /// </exception>
-        Byte[] GetData(long offset, ref int count);
+        byte[] GetData(long offset, ref int count);
     }
 }

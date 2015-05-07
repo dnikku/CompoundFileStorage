@@ -1,22 +1,3 @@
-/*
-     The contents of this file are subject to the Mozilla Public License
-     Version 1.1 (the "License"); you may not use this file except in
-     compliance with the License. You may obtain a copy of the License at
-     http://www.mozilla.org/MPL/
-
-     Software distributed under the License is distributed on an "AS IS"
-     basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
-     License for the specific language governing rights and limitations
-     under the License.
-
-     The Original Code is OpenMCDF - Compound Document Format library.
-
-     The Initial Developer of the Original Code is Federico Blaseotto.
- 
-     The code is modified to more now a days standards and upgraded to
-     C# .NET 4.0 by Kees van Spelde
-*/
-
 namespace CompoundFileStorage.Interfaces
 {
     /// <summary>
@@ -25,7 +6,7 @@ namespace CompoundFileStorage.Interfaces
     public interface ICFStorage : ICFItem
     {
         /// <summary>
-        ///     Gets a named <see cref="ICFStream"/> contained in the current storage if existing.
+        ///     Gets a named <see cref="ICFStream" /> contained in the current storage if existing.
         /// </summary>
         /// <param name="streamName">Name of the stream to look for</param>
         /// <returns>A stream reference if existing</returns>
@@ -38,7 +19,7 @@ namespace CompoundFileStorage.Interfaces
         ///     item to delete is not found
         /// </exception>
         /// <example>
-        ///     <code>
+        ///  <code>
         ///  String filename = "report.xls";
         /// 
         ///  CompoundFile cf = new CompoundFile(filename);
@@ -59,7 +40,7 @@ namespace CompoundFileStorage.Interfaces
         /// <param name="streamName">Name of the stream to look for</param>
         /// <returns>A boolean value indicating whether the child stream exists.</returns>
         /// <example>
-        ///     <code>
+        ///  <code>
         ///  string filename = "report.xls";
         /// 
         ///  CompoundFile cf = new CompoundFile(filename);
@@ -69,7 +50,6 @@ namespace CompoundFileStorage.Interfaces
         ///  if exists
         ///  {
         ///      CFStream foundStream = cf.RootStorage.GetStream("Workbook");
-        ///  
         ///      byte[] temp = foundStream.GetData();
         ///  }
         /// 
@@ -93,7 +73,7 @@ namespace CompoundFileStorage.Interfaces
         ///     Raised if item to delete is not found
         /// </exception>
         /// <example>
-        ///     <code>
+        ///  <code>
         ///  
         ///  string FILENAME = "MultipleStorage2.cfs";
         ///  CompoundFile cf = new CompoundFile(FILENAME);
@@ -102,7 +82,7 @@ namespace CompoundFileStorage.Interfaces
         /// 
         ///  Assert.IsNotNull(st);
         ///  cf.Close();
-        ///  </code>
+        /// </code>
         /// </example>
         ICFStorage GetStorage(string storageName);
 
@@ -112,16 +92,14 @@ namespace CompoundFileStorage.Interfaces
         /// <param name="storageName">Name of the storage to look for.</param>
         /// <returns>A boolean value indicating whether the child storage was found.</returns>
         /// <example>
-        ///     <code>
+        ///  <code>
         ///  string FILENAME = "MultipleStorage2.cfs";
         ///  CompoundFile cf = new CompoundFile(FILENAME, UpdateMode.ReadOnly, false, false);
         /// 
         ///  bool exists = cf.RootStorage.ExistsStorage("MyStorage");
         ///  
         ///  if exists
-        ///  {
         ///      CFStorage st = cf.RootStorage.GetStorage("MyStorage");
-        ///  }
         ///  
         ///  Assert.IsNotNull(st);
         ///  cf.Close();

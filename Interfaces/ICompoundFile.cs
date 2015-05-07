@@ -38,7 +38,7 @@ namespace CompoundFileStorage.Interfaces
         ICFStorage RootStorage { get; }
 
         /// <summary>
-        /// Returns the version of the compound file
+        ///     Returns the version of the compound file
         /// </summary>
         CFSVersion Version { get; }
 
