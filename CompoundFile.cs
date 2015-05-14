@@ -462,7 +462,7 @@ namespace CompoundFileStorage
         // ReSharper disable once UnusedParameter.Local
         public CompoundFile(Stream stream, bool readCorruptedFile = false)
         {
-            ReadCorruptedFile = true;
+            ReadCorruptedFile = readCorruptedFile;
             LoadStream(stream);
 
             _difatSectorFATEntriesCount = (GetSectorSize()/4) - 1;
@@ -617,7 +617,7 @@ namespace CompoundFileStorage
 
                 LoadDirectories();
 
-                if (_directoryEntries.Count == 1)
+                if (_directoryEntries.Count > 0)
                     RootStorage = new CFStorage(this, _directoryEntries[0]);
             }
             catch (Exception)
