@@ -79,7 +79,7 @@ namespace CompoundFileStorage
         /// </code>
         /// </example>
         /// <returns>Array of byte containing stream data</returns>
-        /// <exception cref="T:DocumentServices.Modules.Extractors.OfficeExtractor.OLECompoundFileStorage.CFDisposedException">
+        /// <exception cref="CFDisposedException">
         ///     Raised when the owner compound file has been closed.
         /// </exception>
         public Byte[] GetData()
