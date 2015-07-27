@@ -891,8 +891,11 @@ namespace CompoundFileStorage
             }
 
             // Write End of Chain in MiniFAT
-            miniFATView.Seek(sectorChain[sectorChain.Count - 1].Id*SizeOfSID, SeekOrigin.Begin);
-            miniFATView.Write(BitConverter.GetBytes(Sector.Endofchain), 0, 4);
+            if (sectorChain.Count > 0)
+            {
+                miniFATView.Seek(sectorChain[sectorChain.Count - 1].Id*SizeOfSID, SeekOrigin.Begin);
+                miniFATView.Write(BitConverter.GetBytes(Sector.Endofchain), 0, 4);
+            }
 
             // Update sector chains
             SetNormalSectorChain(miniStreamView.BaseSectorChain);
@@ -1056,8 +1059,11 @@ namespace CompoundFileStorage
                 fatStream.Write(BitConverter.GetBytes(sN.Id), 0, 4);
             }
 
-            fatStream.Seek(sectorChain[sectorChain.Count - 1].Id*4, SeekOrigin.Begin);
-            fatStream.Write(BitConverter.GetBytes(Sector.Endofchain), 0, 4);
+            if (sectorChain.Count > 0)
+            {
+                fatStream.Seek(sectorChain[sectorChain.Count - 1].Id*4, SeekOrigin.Begin);
+                fatStream.Write(BitConverter.GetBytes(Sector.Endofchain), 0, 4);
+            }
 
             // Merge chain to CFS
             SetDIFATSectorChain(fatStream.BaseSectorChain);
@@ -1916,7 +1922,7 @@ namespace CompoundFileStorage
                 throw new CFException("Parameter [buffer] cannot be null");
 
             // Quick and dirty :-)
-            if (buffer.Length == 0) return;
+            //if (buffer.Length == 0) return;
 
             var directoryEntry = cfItem.DirEntry;
 
